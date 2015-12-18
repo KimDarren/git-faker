@@ -1,6 +1,6 @@
 # `git-faker` :facepunch:
 
-`git-fire` is a Git plugin that **makes you to be the best commiter in the planet** by add some _fake_ commits.
+`git-faker` is a Git plugin that **makes you to be the best commiter in the planet** by add some _fake_ commits.
 
 ## Screenshots
 

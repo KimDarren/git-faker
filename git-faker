@@ -1,0 +1,79 @@
+#!/usr/bin/env sh
+
+VERSION="0.1.0"
+
+version() {
+	printf "git-faker version %s\n" "$VERSION"
+}
+
+# Helpers.
+
+current_year() {
+	date +"%Y"
+}
+
+last_year() {
+	year=$(current_year)
+	echo $(( ${year#0} -1 ))
+}
+
+current_branch() {
+	basename "$(git symbolic-ref HEAD)"
+}
+
+faker() {
+
+	rm -rf .git-faker
+	mkdir .git-faker
+
+	if [ -z "$1" ]; then
+		branch="$(current_branch)"
+	else
+		branch="$*"
+	fi
+
+	git checkout $branch >/dev/null
+
+	months=( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec )
+
+	for month in ${months[@]}; do
+		for day in {1..31}; do
+			ranH=$RANDOM
+			ranS=$RANDOM
+			ranM=$RANDOM
+
+			hour=$(( ranH %= 23 ))
+			min=$(( ranM %= 59 ))
+			sec=$(( ranS %= 59 ))
+
+			echo "hello world" > ".git-faker/$(current_year).$month.$day"
+			git add -A >/dev/null
+			GIT_AUTHOR_DATE="$month $day $hour:$min:$sec $(current_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$min:$sec $(current_year) -0000" git commit -m "I'm working hard.." >/dev/null
+
+			echo "kkkk" > ".git-faker/$(last_year).$month.$day"
+			git add -A >/dev/null
+			GIT_AUTHOR_DATE="$month $day $hour:$sec:$min $(last_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$sec:$min $(last_year) -0000" git commit -m "I'm hustlin" >/dev/null
+		done
+	done
+
+	printf "Great!\nYou should push to the GitHub!\nNow, you are the best commiter in the planet.\n"
+}
+
+display_help() {
+	cat <<-EOF
+
+  usage:
+    git faker						That's all!
+
+EOF
+	exit 0
+}
+
+
+case $1 in
+	-V|--version) version; exit 0 ;;
+	-h|--help) display_help; exit 0 ;;
+esac
+
+faker "$@"
+

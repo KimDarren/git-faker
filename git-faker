@@ -50,7 +50,7 @@ faker() {
 			git add -A >/dev/null
 			GIT_AUTHOR_DATE="$month $day $hour:$min:$sec $(current_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$min:$sec $(current_year) -0000" git commit -m "I'm working hard.." >/dev/null
 
-			echo "kkkk" > ".git-faker/$(last_year).$month.$day"
+			echo "var express     = require('express')" > ".git-faker/$(last_year).$month.$day.js"
 			git add -A >/dev/null
 			GIT_AUTHOR_DATE="$month $day $hour:$sec:$min $(last_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$sec:$min $(last_year) -0000" git commit -m "I'm hustlin" >/dev/null
 		done

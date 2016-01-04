@@ -28,9 +28,9 @@ Finally, you can set the **language** by `options`.
 
 ### Options
 
-1. `--objc`: set the language as _Objective-C_
-2. `--java`: set the language as _Java_
-3. `--js`: set the language as _Javascript_
+1. ![objc](https://raw.githubusercontent.com/KimDarren/git-faker/master/screenshots/objc.png): set the language as _Objective-C_
+2. ![java](https://raw.githubusercontent.com/KimDarren/git-faker/master/screenshots/java.png): set the language as _Java_
+3. ![js](https://raw.githubusercontent.com/KimDarren/git-faker/master/screenshots/js.png): set the language as _Javascript_
 4. `--c`: set the language as _C_
 
 ## Installation

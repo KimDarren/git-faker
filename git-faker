@@ -36,6 +36,9 @@ faker() {
 		objc)
 				extension="m"
 				code="#import <UIKit/UIKit.h> @interface NSFaker () @end @implementation NSFaker - (instancetype)init { self = [super init]; if (self) {self.title = "faker";} return self; } @end " ;;
+		js)
+				extension="js"
+				code="var express     = require('express'); console.log(express);" ;;
 		*)
 				code="" ;;
 	esac

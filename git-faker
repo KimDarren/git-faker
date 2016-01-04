@@ -81,7 +81,18 @@ display_help() {
 	cat <<-EOF
 
   usage:
-    git faker						That's all!
+    git faker                       Execute git faker at current branch
+
+  commands:
+    git faker <branch>              Execute git faker with <branch> for commit
+
+  options:
+    -V, --version                   Output current version of git-faker
+    -h, --help                      Display this help information
+    --objc                          Set the language: Objective-C
+    --java                          Set the language: Java
+    --js                            Set the language: Javascript
+    --c                             Set the language: C
 
 EOF
 	exit 0

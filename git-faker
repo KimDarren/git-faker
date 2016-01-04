@@ -32,6 +32,11 @@ faker() {
 		branch="$*"
 	fi
 
+	case "$2" in
+		*)
+				code="" ;;
+	esac
+
 	git checkout $branch >/dev/null
 
 	months=( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec )

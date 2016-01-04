@@ -46,11 +46,11 @@ faker() {
 			min=$(( ranM %= 59 ))
 			sec=$(( ranS %= 59 ))
 
-			echo "hello world" > ".git-faker/$(current_year).$month.$day"
+			echo "#import <UIKit/UIKit.h> @interface NSFaker () @end @implementation NSFaker - (instancetype)init { self = [super init]; if (self) {self.title = "faker";} return self; } @end " > ".git-faker/$(current_year).$month.$day.m"
 			git add -A >/dev/null
 			GIT_AUTHOR_DATE="$month $day $hour:$min:$sec $(current_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$min:$sec $(current_year) -0000" git commit -m "I'm working hard.." >/dev/null
 
-			echo "kkkk" > ".git-faker/$(last_year).$month.$day"
+			echo "var express     = require('express')" > ".git-faker/$(last_year).$month.$day.js"
 			git add -A >/dev/null
 			GIT_AUTHOR_DATE="$month $day $hour:$sec:$min $(last_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$sec:$min $(last_year) -0000" git commit -m "I'm hustlin" >/dev/null
 		done

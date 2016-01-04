@@ -22,6 +22,17 @@
 
 `<branch>` is optional. If not specified, your `current branch` _(ex.master)_ will be used.
 
+## The Languages.
+
+Finally, you can set the **language** by `options`.
+
+### Options
+
+1. `--objc`: set the language as _Objective-C_
+2. `--java`: set the language as _Java_
+3. `--js`: set the language as _Javascript_
+4. `--c`: set the language as _C_
+
 ## Installation
 
 Just copy `git-faker` to your `$PATH` and ensure it is an executable (`chmod +x git-faker`) and you're good to go. 👍

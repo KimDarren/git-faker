@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-VERSION="0.1.0"
+VERSION="0.2.0"
 
 version() {
 	printf "git-faker version %s\n" "$VERSION"
@@ -29,8 +29,26 @@ faker() {
 	if [ -z "$1" ]; then
 		branch="$(current_branch)"
 	else
-		branch="$*"
+		branch="$1"
 	fi
+
+	case "$2" in
+		objc)
+				extension="m"
+				code="#import <UIKit/UIKit.h> @interface NSFaker () @end @implementation NSFaker - (instancetype)init { self = [super init]; if (self) {self.title = "faker";} return self; } @end " ;;
+		js)
+				extension="js"
+				code="var express     = require('express'); console.log(express);" ;;
+		java)
+				extension="java"
+				code="public class IntListVer1 {private static final int DEFAULT_CAP = 10;private int[] iValues;private int iSize;public IntListVer1(){this(DEFAULT_CAP);}}" ;;
+		c)
+				extension="c"
+				code="#include <stdio.h> int main(){int c = 0;char ch, s[1000];gets(s);while (s[c] != '\0') {ch = s[c];if (ch >= 'A' && ch <= 'Z'){s[c] = s[c] + 32;}}return 0;}" ;;
+		*)
+				extension=""
+				code="default" ;;
+	esac
 
 	git checkout $branch >/dev/null
 
@@ -46,11 +64,11 @@ faker() {
 			min=$(( ranM %= 59 ))
 			sec=$(( ranS %= 59 ))
 
-			echo "#import <UIKit/UIKit.h> @interface NSFaker () @end @implementation NSFaker - (instancetype)init { self = [super init]; if (self) {self.title = "faker";} return self; } @end " > ".git-faker/$(current_year).$month.$day.m"
+			echo "$code" > ".git-faker/$(current_year).$month.$day.$extension"
 			git add -A >/dev/null
 			GIT_AUTHOR_DATE="$month $day $hour:$min:$sec $(current_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$min:$sec $(current_year) -0000" git commit -m "I'm working hard.." >/dev/null
 
-			echo "var express     = require('express')" > ".git-faker/$(last_year).$month.$day.js"
+			echo "$code" > ".git-faker/$(last_year).$month.$day.$extension"
 			git add -A >/dev/null
 			GIT_AUTHOR_DATE="$month $day $hour:$sec:$min $(last_year) -0000" GIT_COMMITTER_DATE="$month $day $hour:$sec:$min $(last_year) -0000" git commit -m "I'm hustlin" >/dev/null
 		done
@@ -63,7 +81,18 @@ display_help() {
 	cat <<-EOF
 
   usage:
-    git faker						That's all!
+    git faker                       Execute git faker at current branch
+
+  commands:
+    git faker <branch>              Execute git faker with <branch> for commit
+
+  options:
+    -V, --version                   Output current version of git-faker
+    -h, --help                      Display this help information
+    --objc                          Set the language: Objective-C
+    --java                          Set the language: Java
+    --js                            Set the language: Javascript
+    --c                             Set the language: C
 
 EOF
 	exit 0
@@ -73,6 +102,10 @@ EOF
 case $1 in
 	-V|--version) version; exit 0 ;;
 	-h|--help) display_help; exit 0 ;;
+	--objc) faker "$(current_branch)" "objc"; exit 0 ;;
+	--java) faker "$(current_branch)" "java"; exit 0 ;;
+	--js) faker "$(current_branch)" "js"; exit 0 ;;
+	--c) faker "$(current_branch)" "c"; exit 0 ;;
 esac
 
 faker "$@"

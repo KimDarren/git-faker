@@ -39,6 +39,9 @@ faker() {
 		js)
 				extension="js"
 				code="var express     = require('express'); console.log(express);" ;;
+		java)
+				extension="java"
+				code="public class IntListVer1 {private static final int DEFAULT_CAP = 10;private int[] iValues;private int iSize;public IntListVer1(){this(DEFAULT_CAP);}}" ;;
 		*)
 				code="" ;;
 	esac

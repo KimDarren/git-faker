@@ -29,7 +29,7 @@ faker() {
 	if [ -z "$1" ]; then
 		branch="$(current_branch)"
 	else
-		branch="$*"
+		branch="$1"
 	fi
 
 	case "$2" in
